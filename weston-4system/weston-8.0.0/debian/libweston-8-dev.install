@@ -1,0 +1,9 @@
+usr/include/libweston-8
+usr/lib/*/libweston-8.so
+usr/lib/*/libweston-desktop-8.so
+usr/lib/*/pkgconfig/libweston-8.pc
+usr/lib/*/pkgconfig/libweston-desktop-8.pc
+usr/lib/*/weston/libexec_weston.so
+usr/share/libweston-8/protocols/weston-debug.xml
+usr/share/libweston-8/protocols/weston-direct-display.xml
+usr/share/pkgconfig/libweston-8-protocols.pc

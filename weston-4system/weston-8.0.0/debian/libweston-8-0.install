@@ -1,0 +1,12 @@
+usr/lib/*/libweston-8.so.*
+usr/lib/*/libweston-8/drm-backend.so
+usr/lib/*/libweston-8/fbdev-backend.so
+usr/lib/*/libweston-8/gl-renderer.so
+usr/lib/*/libweston-8/headless-backend.so
+usr/lib/*/libweston-8/pipewire-plugin.so
+usr/lib/*/libweston-8/rdp-backend.so
+usr/lib/*/libweston-8/remoting-plugin.so
+usr/lib/*/libweston-8/wayland-backend.so
+usr/lib/*/libweston-8/x11-backend.so
+usr/lib/*/libweston-8/xwayland.so
+usr/lib/*/libweston-desktop-8.so.*
