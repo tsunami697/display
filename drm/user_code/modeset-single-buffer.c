@@ -1,4 +1,7 @@
-//https://blog.csdn.net/hexiaolong2009/article/details/83721242
+/*
+ * form: https://blog.csdn.net/hexiaolong2009/article/details/83721242
+ * api:  https://docs.nvidia.com/jetson/l4t-multimedia/group__direct__rendering__manager.html#gaad5e4605c45f9b796e3633fe574b82a8
+ */
 
 #define _GNU_SOURCE
 #include <errno.h>
@@ -79,13 +82,44 @@ int main(int argc, char **argv)
 
 	fd = open("/dev/dri/card0", O_RDWR | O_CLOEXEC);
 
+	//drmModeResPtr drmModeGetResources	(	int 	fd	)
+	//Gets information about a DRM device's CRTCs, encoders, and connectors.
+
+	//Gets a list of a DRM device's major resources. A DRM application typically calls this function early to identify available displays and other resources. 
+	//The function does not report plane resources, though. These can be queried with drmModeGetPlaneResources.
+
+	//Note
+	//The drmModeResPtr structure's min_width, min_height, max_width, and max_height members are set to placeholder values.
+	//Postcondition
+	//If the call is successful, the application must free the resource information structure by calling drmModeFreeResources.
+	//Parameters
+	//fd	The file descriptor of an open DRM device.
+	//Returns
+	//A drmModeResPtr structure if successful, or NULL otherwise.
 	res = drmModeGetResources(fd);
 	crtc_id = res->crtcs[0];
 	conn_id = res->connectors[0];
 
+	printf("ljlj res count_crtcs: %d, count_connectors: %d, count_encoders: %d\n", \
+			res->count_crtcs, res->count_connectors, res->count_encoders);
+	//Gets information for a connector.
+
+	//If connector_id is valid, fetches a drmModeConnectorPtr structure which contains information about a connector, such as available modes, connection status, connector type, and which encoder (if any) is attached.
+
+	//Postcondition
+	//If the call is successful, the application must free the connector information structure by calling drmModeFreeConnector.
+	//Note
+	//connector->mmWidth and connector->mmHeight are currently set to placeholder values.
+	//Parameters
+	//fd	The file descriptor of an open DRM device.
+	//connector_id	The connector ID of the connector to be retrieved.
+	//Returns
+	//A drmModeConnectorPtr structure if successful, or NULL if the connector is not found or the API is out of memory.
 	conn = drmModeGetConnector(fd, conn_id);
 	buf.width = conn->modes[0].hdisplay;
 	buf.height = conn->modes[0].vdisplay;
+	printf("ljlj conn->tpye: %d, conn->count_modes\n", conn->count_modes);
+	printf("ljlj buf.width: %d, buf.height: %d\n", buf.width, buf.height);
 
 	modeset_create_fb(fd, &buf);
 
